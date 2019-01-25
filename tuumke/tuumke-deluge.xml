@@ -1,0 +1,192 @@
+<?xml version="1.0"?>
+<Container version="2">
+  <Name>deluge</Name>
+  <Repository>binhex/arch-delugevpn</Repository>
+  <Registry>https://registry.hub.docker.com/u/binhex/arch-delugevpn/</Registry>
+  <Network>internal</Network>
+  <MyIP>172.18.0.14</MyIP>
+  <Privileged>true</Privileged>
+  <Support>http://lime-technology.com/forum/index.php?topic=45812.0</Support>
+  <Project>http://deluge-torrent.org/</Project>
+  <Overview>
+    Deluge is a full-featured &#x200B;BitTorrent client for Linux, OS X, Unix and Windows. It uses &#x200B;libtorrent in its backend and features multiple user-interfaces including: GTK+, web and console. It has been designed using the client server model with a daemon process that handles all the bittorrent activity. The Deluge daemon is able to run on headless machines with the user-interfaces being able to connect remotely from any platform.[br]
+    This Docker includes OpenVPN to ensure a secure and private connection to the Internet, including use of iptables to prevent IP leakage when the tunnel is down. It also includes Privoxy to allow unfiltered access to index sites, to use Privoxy please point your application at "host ip:8118"
+  </Overview>
+  <Category>Downloaders:</Category>
+  <WebUI>https://web.tuumke.nl/deluge</WebUI>
+  <TemplateURL>https://raw.githubusercontent.com/binhex/docker-templates/master/binhex/delugevpn.xml</TemplateURL>
+  <Icon>https://raw.githubusercontent.com/binhex/docker-templates/master/binhex/images/deluge-icon.png</Icon>
+  <ExtraParams>--hostname=deluge</ExtraParams>
+  <PostArgs/>
+  <DateInstalled>1531384213</DateInstalled>
+  <DonateText>If you appreciate my work, then please consider buying me a beer :D</DonateText>
+  <DonateLink>https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&amp;amp;hosted_button_id=MM5E27UX6AUU4</DonateLink>
+  <Description>&#xD;
+    Deluge is a full-featured &#x200B;BitTorrent client for Linux, OS X, Unix and Windows. It uses &#x200B;libtorrent in its backend and features multiple user-interfaces including: GTK+, web and console. It has been designed using the client server model with a daemon process that handles all the bittorrent activity. The Deluge daemon is able to run on headless machines with the user-interfaces being able to connect remotely from any platform.[br]&#xD;
+    This Docker includes OpenVPN to ensure a secure and private connection to the Internet, including use of iptables to prevent IP leakage when the tunnel is down. It also includes Privoxy to allow unfiltered access to index sites, to use Privoxy please point your application at "host ip:8118"[br][br]&#xD;
+    [b][u][span style='color: #E80000;']Configuration[/span][/u][/b][br]&#xD;
+    [b]/config[/b] This is where deluge will store it's configuration file, database and logs.[br]&#xD;
+    [b]/data[/b] This is where deluge will store data downloaded, watched folder, and archived torrents.[br][br]&#xD;
+    [b][span style='color: #E80000;']Notes[/span][/b][br]&#xD;
+    For help on configuration for PIA, AirVPN and custom VPN providers please go here http://lime-technology.com/forum/index.php?topic=45812.msg437678#msg437678[br]&#xD;
+    IMPORTANT - To allow access to the Deluge webui, Privoxy and Deluge deamon you need to specify you LAN network, using CIDR notation for the mask, a subnet mask of 255.255.255.0 would equate to CIDR /24, 255.255.0.0 would equate to CIDR /16.&#xD;
+  </Description>
+  <Networking>
+    <Mode>internal</Mode>
+    <Publish>
+      <Port>
+        <HostPort>8112</HostPort>
+        <ContainerPort>8112</ContainerPort>
+        <Protocol>tcp</Protocol>
+      </Port>
+      <Port>
+        <HostPort>58846</HostPort>
+        <ContainerPort>58846</ContainerPort>
+        <Protocol>tcp</Protocol>
+      </Port>
+      <Port>
+        <HostPort>58946</HostPort>
+        <ContainerPort>58946</ContainerPort>
+        <Protocol>tcp</Protocol>
+      </Port>
+      <Port>
+        <HostPort>58946</HostPort>
+        <ContainerPort>58946</ContainerPort>
+        <Protocol>udp</Protocol>
+      </Port>
+      <Port>
+        <HostPort>8118</HostPort>
+        <ContainerPort>8118</ContainerPort>
+        <Protocol>tcp</Protocol>
+      </Port>
+    </Publish>
+  </Networking>
+  <Data>
+    <Volume>
+      <HostDir>/mnt/cache/downloads/</HostDir>
+      <ContainerDir>/data</ContainerDir>
+      <Mode>rw</Mode>
+    </Volume>
+    <Volume>
+      <HostDir>/mnt/user/downloads</HostDir>
+      <ContainerDir>/downloads</ContainerDir>
+      <Mode>rw</Mode>
+    </Volume>
+    <Volume>
+      <HostDir>/mnt/user/downloads-incomplete</HostDir>
+      <ContainerDir>/downloads-incomplete</ContainerDir>
+      <Mode>rw</Mode>
+    </Volume>
+    <Volume>
+      <HostDir>/mnt/user/dockers/binhex-delugevpn</HostDir>
+      <ContainerDir>/config</ContainerDir>
+      <Mode>rw</Mode>
+    </Volume>
+  </Data>
+  <Environment>
+    <Variable>
+      <Value>yes</Value>
+      <Name>VPN_ENABLED</Name>
+      <Mode/>
+    </Variable>
+    <Variable>
+      <Value></Value>
+      <Name>VPN_USER</Name>
+      <Mode/>
+    </Variable>
+    <Variable>
+      <Value></Value>
+      <Name>VPN_PASS</Name>
+      <Mode/>
+    </Variable>
+    <Variable>
+      <Value>pia</Value>
+      <Name>VPN_PROV</Name>
+      <Mode/>
+    </Variable>
+    <Variable>
+      <Value/>
+      <Name>VPN_OPTIONS</Name>
+      <Mode/>
+    </Variable>
+    <Variable>
+      <Value>yes</Value>
+      <Name>STRICT_PORT_FORWARD</Name>
+      <Mode/>
+    </Variable>
+    <Variable>
+      <Value>no</Value>
+      <Name>ENABLE_PRIVOXY</Name>
+      <Mode/>
+    </Variable>
+    <Variable>
+      <Value>192.168.3.0/24</Value>
+      <Name>LAN_NETWORK</Name>
+      <Mode/>
+    </Variable>
+    <Variable>
+      <Value>8.8.8.8,8.8.4.4</Value>
+      <Name>NAME_SERVERS</Name>
+      <Mode/>
+    </Variable>
+    <Variable>
+      <Value>false</Value>
+      <Name>DEBUG</Name>
+      <Mode/>
+    </Variable>
+    <Variable>
+      <Value>000</Value>
+      <Name>UMASK</Name>
+      <Mode/>
+    </Variable>
+    <Variable>
+      <Value>1000</Value>
+      <Name>PUID</Name>
+      <Mode/>
+    </Variable>
+    <Variable>
+      <Value>100</Value>
+      <Name>PGID</Name>
+      <Mode/>
+    </Variable>
+  </Environment>
+  <Labels/>
+  <Config Name="Host Port 1" Target="8112" Default="8112" Mode="tcp" Description="Container Port: 8112" Type="Port" Display="always" Required="true" Mask="false">8112</Config>
+  <Config Name="Host Port 2" Target="58846" Default="58846" Mode="tcp" Description="Container Port: 58846" Type="Port" Display="always" Required="true" Mask="false">58846</Config>
+  <Config Name="Host Port 3" Target="58946" Default="58946" Mode="tcp" Description="Container Port: 58946" Type="Port" Display="always" Required="true" Mask="false">58946</Config>
+  <Config Name="Host Port 4" Target="58946" Default="58946" Mode="udp" Description="Container Port: 58946" Type="Port" Display="always" Required="true" Mask="false">58946</Config>
+  <Config Name="Host Port 5" Target="8118" Default="8118" Mode="tcp" Description="Container Port: 8118" Type="Port" Display="always" Required="true" Mask="false">8118</Config>
+  <Config Name="Host Path 2" Target="/data" Default="/mnt/cache/appdata/data" Mode="rw" Description="Container Path: /data" Type="Path" Display="always" Required="true" Mask="false">/mnt/cache/downloads/</Config>
+  <Config Name="Key 1" Target="VPN_ENABLED" Default="yes|no" Mode="" Description="Container Variable: VPN_ENABLED" Type="Variable" Display="always" Required="false" Mask="false">yes</Config>
+  <Config Name="Key 2" Target="VPN_USER" Default="vpn username" Mode="" Description="Container Variable: VPN_USER" Type="Variable" Display="always" Required="false" Mask="false"></Config>
+  <Config Name="Key 3" Target="VPN_PASS" Default="vpn password" Mode="" Description="Container Variable: VPN_PASS" Type="Variable" Display="always" Required="false" Mask="false"></Config>
+  <Config Name="Key 4" Target="VPN_PROV" Default="pia|airvpn|custom" Mode="" Description="Container Variable: VPN_PROV" Type="Variable" Display="always" Required="false" Mask="false">pia</Config>
+  <Config Name="Key 5" Target="VPN_OPTIONS" Default="" Mode="" Description="Container Variable: VPN_OPTIONS" Type="Variable" Display="always" Required="false" Mask="false"/>
+  <Config Name="Key 6" Target="STRICT_PORT_FORWARD" Default="yes" Mode="" Description="Container Variable: STRICT_PORT_FORWARD" Type="Variable" Display="always" Required="false" Mask="false">yes</Config>
+  <Config Name="Key 7" Target="ENABLE_PRIVOXY" Default="no|yes" Mode="" Description="Container Variable: ENABLE_PRIVOXY" Type="Variable" Display="always" Required="false" Mask="false">no</Config>
+  <Config Name="Key 8" Target="LAN_NETWORK" Default="192.168.1.0/24" Mode="" Description="Container Variable: LAN_NETWORK" Type="Variable" Display="always" Required="false" Mask="false">192.168.3.0/24</Config>
+  <Config Name="Key 9" Target="NAME_SERVERS" Default="209.222.18.222,37.235.1.174,1.1.1.1,8.8.8.8,209.222.18.218,37.235.1.177,1.0.0.1,8.8.4.4" Mode="" Description="Container Variable: NAME_SERVERS" Type="Variable" Display="always" Required="false" Mask="false">8.8.8.8,8.8.4.4</Config>
+  <Config Name="Key 10" Target="DEBUG" Default="false|true" Mode="" Description="Container Variable: DEBUG" Type="Variable" Display="always" Required="false" Mask="false">false</Config>
+  <Config Name="Key 11" Target="UMASK" Default="000" Mode="" Description="Container Variable: UMASK" Type="Variable" Display="always" Required="false" Mask="false">000</Config>
+  <Config Name="Key 12" Target="PUID" Default="99" Mode="" Description="Container Variable: PUID" Type="Variable" Display="always" Required="false" Mask="false">1000</Config>
+  <Config Name="Key 13" Target="PGID" Default="100" Mode="" Description="Container Variable: PGID" Type="Variable" Display="always" Required="false" Mask="false">100</Config>
+  <Config Name="downloads" Target="/downloads" Default="" Mode="rw" Description="Container Path: /downloads" Type="Path" Display="always" Required="false" Mask="false">/mnt/user/downloads</Config>
+  <Config Name="downloads-incomplete" Target="/downloads-incomplete" Default="" Mode="rw" Description="Container Path: /downloads-incomplete" Type="Path" Display="always" Required="false" Mask="false">/mnt/user/downloads-incomplete</Config>
+  <Config Name="AppData Config Path" Target="/config" Default="/mnt/user/dockers/binhex-delugevpn" Mode="rw" Description="Container Path: /config" Type="Path" Display="advanced-hide" Required="true" Mask="false">/mnt/user/dockers/binhex-delugevpn</Config>
+  <Config Name="Traefik Enable" Target="traefik.enable" Default="" Mode="" Description="required to proxy:Enable Traefik to expose app to the frontend and proxy" Type="Label" Display="always" Required="false" Mask="false">true</Config>
+  <Config Name="Traefik Backend" Target="traefik.backend" Default="" Mode="" Description="required:name of the container Traefik should map to on the back end (sonarr, radarr, jackett etc...)" Type="Label" Display="always" Required="false" Mask="false">bazarr</Config>
+  <Config Name="Traefik Frontend Rule" Target="traefik.frontend.rule" Default="" Mode="" Description="required/optional: Sets the subdomain rule.&#13;&#10;Use Host:subdomain.domain.tld&#13;&#10;or&#13;&#10;Host:domain.tld; PathPrefixStrip: /sonarr" Type="Label" Display="always" Required="false" Mask="false">Host:bazarr.domain.tld</Config>
+  <Config Name="Traefik Port" Target="traefik.port" Default="" Mode="" Description="required:container port to send traffic to.  Source container port, not the mapping in unraid" Type="Label" Display="always" Required="false" Mask="false">6767</Config>
+  <Config Name="Traefik Docker Network" Target="traefik.docker.network" Default="" Mode="" Description="required: Specify the docker network&#13;&#10;bridge or internal." Type="Label" Display="always" Required="false" Mask="false">internal</Config>
+  <Config Name="Traefik Frontend Headers SSLRedirect" Target="traefik.frontend.headers.SSLRedirect" Default="" Mode="" Description="optional but might as well if you are using SSL" Type="Label" Display="always" Required="false" Mask="false">true</Config>
+  <Config Name="Traefik Frontend Headers STSSeconds" Target="traefik.frontend.headers.STSSeconds" Default="" Mode="" Description="optional, you may remove this" Type="Label" Display="always" Required="false" Mask="false">315360000</Config>
+  <Config Name="Traefik Frontend Headers Browser XSSFilter" Target="traefik.frontend.headers.browserXSSFilter" Default="" Mode="" Description="optional, you may remove this" Type="Label" Display="always" Required="false" Mask="false">true</Config>
+  <Config Name="Traefik Frontend Headers ContentTypeNosniff" Target="traefik.frontend.headers.contentTypeNosniff" Default="" Mode="" Description="optional, you may remove this" Type="Label" Display="always" Required="false" Mask="false">true</Config>
+  <Config Name="Traefik Frontend Headers ForceSTSHeader" Target="traefik.frontend.headers.forceSTSHeader" Default="" Mode="" Description="may be required" Type="Label" Display="always" Required="false" Mask="false">true</Config>
+  <Config Name="Traefik Frontend Headers SSLHost" Target="traefik.frontend.headers.SSLHost" Default="" Mode="" Description="required" Type="Label" Display="always" Required="false" Mask="false">domain.tld</Config>
+  <Config Name="Traefik Frontend Headers STSIncludeSubdomains" Target="traefik.frontend.headers.STSIncludeSubdomains" Default="" Mode="" Description="may be required" Type="Label" Display="always" Required="false" Mask="false">true</Config>
+  <Config Name="Traefik Frontend Headers STSPreload" Target="traefik.frontend.headers.STSPreload" Default="" Mode="" Description="optional" Type="Label" Display="always" Required="false" Mask="false">true</Config>
+  <Config Name="Traefik Frontend Headers frameDeny" Target="traefik.frontend.headers.frameDeny" Default="" Mode="" Description="optional" Type="Label" Display="always" Required="false" Mask="false">true</Config>
+  <Config Name="Traefik Frontend Auth Basic usersFile" Target="traefik.frontend.auth.basic.usersFile" Default="" Mode="" Description="This is what sets up the front end interface to use the generated .htaccess file.  Add this line to any site you want additional security on." Type="Label" Display="always" Required="false" Mask="false">/shared/.htpasswd</Config>
+
+</Container>

@@ -1,62 +1,46 @@
 <?xml version="1.0"?>
 <Container version="2">
-  <Name>sonarr</Name>
-  <Repository>linuxserver/sonarr</Repository>
-  <Registry>https://hub.docker.com/r/linuxserver/sonarr/</Registry>
+  <Name>jackett</Name>
+  <Repository>linuxserver/jackett</Repository>
+  <Registry>https://hub.docker.com/r/linuxserver/jackett/</Registry>
   <Network>internal</Network>
-  <MyIP>172.18.0.9</MyIP>
+  <MyIP>172.18.0.4</MyIP>
   <Privileged>false</Privileged>
-  <Support>https://forums.unraid.net/topic/41908-support-linuxserverio-sonarr/</Support>
-  <Project>https://sonarr.tv/</Project>
-  <Overview>Sonarr (formerly NZBdrone) is a PVR for usenet and bittorrent users. It can monitor multiple RSS feeds for new episodes of your favorite shows and will grab, sort and rename them. It can also be configured to automatically upgrade the quality of files already downloaded when a better quality format becomes available.</Overview>
-  <Category>Downloaders: MediaApp:Video</Category>
-  <WebUI>http://[IP]:[PORT:8989]/</WebUI>
-  <TemplateURL>https://raw.githubusercontent.com/linuxserver/docker-templates/master/linuxserver.io/sonarr.xml</TemplateURL>
-  <Icon>https://raw.githubusercontent.com/linuxserver/docker-templates/master/linuxserver.io/img/sonarr-icon.png</Icon>
-  <ExtraParams>--hostname=sonarr</ExtraParams>
+  <Support>https://forums.unraid.net/topic/44235-support-linuxserverio-jackett/</Support>
+  <Project>https://github.com/Jackett/Jackett</Project>
+  <Overview>Jackett works as a proxy server it translates queries from apps like Sonarr etc into tracker-site-specific http queries and parses the html response sending results back to the requesting software.[</Overview>
+  <Category>Downloaders: Tools:</Category>
+  <WebUI>http://[IP]:[PORT:9117]/</WebUI>
+  <TemplateURL>https://raw.githubusercontent.com/linuxserver/docker-templates/master/linuxserver.io/jackett.xml</TemplateURL>
+  <Icon>https://raw.githubusercontent.com/linuxserver/docker-templates/master/linuxserver.io/img/jacket-icon.png</Icon>
+  <ExtraParams>--hostname=jackett</ExtraParams>
   <PostArgs/>
-  <DateInstalled>1530876368</DateInstalled>
+  <DateInstalled>1530876046</DateInstalled>
   <DonateText>Donations</DonateText>
   <DonateLink>https://www.linuxserver.io/donate</DonateLink>
-  <Description>
-    Sonarr (formerly NZBdrone) is a PVR for usenet and bittorrent users. It can monitor multiple RSS feeds for new episodes of your favorite shows and will grab, sort and rename them. It can also be configured to automatically upgrade the quality of files already downloaded when a better quality format becomes available.&#xD;
-    [br][br][b][u][span style='color: #E80000;']Configuration[/span][/u][/b][br]&#xD;
-    &#xD;
-    [b]/config[/b] : Storing all Sonarr config files [br]&#xD;
-    &#xD;
-    [b]/tv[/b] : Point to TV share[br]&#xD;
-    &#xD;
-    [b]/download[/b] : Point to Download's[br]&#xD;
-    [b]8989[/b] : The web-interface. [br]
+  <Description>Jackett works as a proxy server it translates queries from apps like Sonarr etc into tracker-site-specific http queries and parses the html response sending results back to the requesting software.[br]&#xD;
+  [br][br][b][u][span style='color: #E80000;']Configuration[/span][/u][/b][br]&#xD;
+  [b]/config[/b] : Storing all jackett config files [br]&#xD;
+  [b]/downloads[/b] : Point to torrent blackhole [br]&#xD;
   </Description>
   <Networking>
     <Mode>internal</Mode>
     <Publish>
       <Port>
-        <HostPort>8989</HostPort>
-        <ContainerPort>8989</ContainerPort>
+        <HostPort>9117</HostPort>
+        <ContainerPort>9117</ContainerPort>
         <Protocol>tcp</Protocol>
       </Port>
     </Publish>
   </Networking>
   <Data>
     <Volume>
-      <HostDir>/dev/rtc</HostDir>
-      <ContainerDir>/dev/rtc</ContainerDir>
-      <Mode>ro</Mode>
-    </Volume>
-    <Volume>
-      <HostDir>/mnt/user/TVShows/</HostDir>
-      <ContainerDir>/tv</ContainerDir>
-      <Mode>rw</Mode>
-    </Volume>
-    <Volume>
       <HostDir>/mnt/user/downloads/</HostDir>
       <ContainerDir>/downloads</ContainerDir>
       <Mode>rw</Mode>
     </Volume>
     <Volume>
-      <HostDir>/mnt/user/dockers/sonarr</HostDir>
+      <HostDir>/mnt/user/dockers/jackett</HostDir>
       <ContainerDir>/config</ContainerDir>
       <Mode>rw</Mode>
     </Volume>
@@ -74,13 +58,11 @@
     </Variable>
   </Environment>
   <Labels/>
-  <Config Name="Host Port 1" Target="8989" Default="8989" Mode="tcp" Description="Container Port: 8989" Type="Port" Display="always" Required="true" Mask="false">8989</Config>
-  <Config Name="Host Path 2" Target="/dev/rtc" Default="/dev/rtc" Mode="ro" Description="Container Path: /dev/rtc" Type="Path" Display="always" Required="true" Mask="false">/dev/rtc</Config>
-  <Config Name="Host Path 3" Target="/tv" Default="" Mode="rw" Description="Container Path: /tv" Type="Path" Display="always" Required="true" Mask="false">/mnt/user/TVShows/</Config>
-  <Config Name="Host Path 4" Target="/downloads" Default="" Mode="rw" Description="Container Path: /downloads" Type="Path" Display="always" Required="true" Mask="false">/mnt/user/downloads/</Config>
+  <Config Name="Host Port 1" Target="9117" Default="9117" Mode="tcp" Description="Container Port: 9117" Type="Port" Display="always" Required="true" Mask="false">9117</Config>
+  <Config Name="Host Path 2" Target="/downloads" Default="" Mode="rw" Description="Container Path: /downloads" Type="Path" Display="always" Required="true" Mask="false">/mnt/user/downloads/</Config>
   <Config Name="Key 1" Target="PUID" Default="99" Mode="" Description="Container Variable: PUID" Type="Variable" Display="always" Required="false" Mask="false">1000</Config>
   <Config Name="Key 2" Target="PGID" Default="100" Mode="" Description="Container Variable: PGID" Type="Variable" Display="always" Required="false" Mask="false">100</Config>
-  <Config Name="AppData Config Path" Target="/config" Default="/mnt/user/dockers/sonarr" Mode="rw" Description="Container Path: /config" Type="Path" Display="advanced-hide" Required="true" Mask="false">/mnt/user/dockers/sonarr</Config>
+  <Config Name="AppData Config Path" Target="/config" Default="/mnt/user/dockers/jackett" Mode="rw" Description="Container Path: /config" Type="Path" Display="advanced-hide" Required="true" Mask="false">/mnt/user/dockers/jackett</Config>
   <Config Name="Traefik Enable" Target="traefik.enable" Default="" Mode="" Description="required to proxy:Enable Traefik to expose app to the frontend and proxy" Type="Label" Display="always" Required="false" Mask="false">true</Config>
   <Config Name="Traefik Backend" Target="traefik.backend" Default="" Mode="" Description="required:name of the container Traefik should map to on the back end (sonarr, radarr, jackett etc...)" Type="Label" Display="always" Required="false" Mask="false">bazarr</Config>
   <Config Name="Traefik Frontend Rule" Target="traefik.frontend.rule" Default="" Mode="" Description="required/optional: Sets the subdomain rule.&#13;&#10;Use Host:subdomain.domain.tld&#13;&#10;or&#13;&#10;Host:domain.tld; PathPrefixStrip: /sonarr" Type="Label" Display="always" Required="false" Mask="false">Host:bazarr.domain.tld</Config>
@@ -96,4 +78,5 @@
   <Config Name="Traefik Frontend Headers STSPreload" Target="traefik.frontend.headers.STSPreload" Default="" Mode="" Description="optional" Type="Label" Display="always" Required="false" Mask="false">true</Config>
   <Config Name="Traefik Frontend Headers frameDeny" Target="traefik.frontend.headers.frameDeny" Default="" Mode="" Description="optional" Type="Label" Display="always" Required="false" Mask="false">true</Config>
   <Config Name="Traefik Frontend Auth Basic usersFile" Target="traefik.frontend.auth.basic.usersFile" Default="" Mode="" Description="This is what sets up the front end interface to use the generated .htaccess file.  Add this line to any site you want additional security on." Type="Label" Display="always" Required="false" Mask="false">/shared/.htpasswd</Config>
+
 </Container>
