@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Container>
-  <TemplateURL>https://raw.githubusercontent.com/linuxserver/docker-templates/master/linuxserver.io/sonarr.xml</TemplateURL>
+  <TemplateURL>https://raw.githubusercontent.com/Tuumke/docker-templates/master/tuumke-sonarr.xml</TemplateURL>
   <Beta>False</Beta>
   <Category>Downloaders: MediaApp:Video</Category>
   <Date>2017-04-17</Date>
-  <Name>sonarr</Name>
+  <Name>sonarr-tuumke</Name>
   <Changes></Changes>
   <Support>https://forums.unraid.net/topic/41908-support-linuxserverio-sonarr/</Support>
   <Description>Sonarr (formerly NZBdrone) is a PVR for usenet and bittorrent users. It can monitor multiple RSS feeds for new episodes of your favorite shows and will grab, sort and rename them. It can also be configured to automatically upgrade the quality of files already downloaded when a better quality format becomes available.&#13;
