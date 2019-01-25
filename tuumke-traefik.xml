@@ -3,12 +3,12 @@
   <Name>traefik</Name>
   <Repository>traefik:latest</Repository>
   <Registry>library/traefik - Docker Hub</Registry>
-  <Network>internal</Network>
+  <Network>bridge</Network>
   <Shell>sh</Shell>
   <Privileged>false</Privileged>
-<Support>https://github.com/tuumke/docker-templates/issues</Support>
+  <Support>https://github.com/tuumke/docker-templates/issues</Support>
   <Project/>
-  <Overview>Traefik is a modern reverse-proxy.  You must have a traefik.toml config located in your appdata/traefik directory.  Example template with very little modification needed is available here https://raw.githubusercontent.com/benderstwin/Portainer-Templates/master/traefik.toml[br]
+  <Overview>Traefik is a modern reverse-proxy. You must have a traefik.toml config located in your appdata/traefik directory.  Example template with very little modification needed is available here https://raw.githubusercontent.com/benderstwin/Portainer-Templates/master/traefik.toml[br]
 [br]
 TO ADD APPS TO TRAEFIK:[br]
 Traefik uses labels to assign proxy behavior[br]
@@ -29,7 +29,8 @@ traefik.frontend.headers.forceSTSHeader=true #may be required[br]
 traefik.frontend.headers.SSLHost=domain.com #required[br]
 traefik.frontend.headers.STSIncludeSubdomains=true #may be required[br]
 traefik.frontend.headers.STSPreload=true #optional[br]
-traefik.frontend.headers.frameDeny=true #optional</Overview>
+traefik.frontend.headers.frameDeny=true #optional
+  </Overview>
   <Category>Network:Web Network:Proxy</Category>
   <WebUI>https://[IP]:[PORT:80]/</WebUI>
   <TemplateURL>https://raw.githubusercontent.com/Tuumke/docker-templates/master/tuumke-traefik.xml</TemplateURL>
@@ -62,6 +63,8 @@ traefik.frontend.headers.SSLHost=domain.com #required[br]
 traefik.frontend.headers.STSIncludeSubdomains=true #may be required[br]
 traefik.frontend.headers.STSPreload=true #optional[br]
 traefik.frontend.headers.frameDeny=true #optional</Description>
+
+  <!-- NETWORKING -->
   <Networking>
     <Mode>bridge</Mode>
     <Publish>
