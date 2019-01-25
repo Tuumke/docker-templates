@@ -30,6 +30,7 @@
     </Variable>
     <Label>
       <Name>traefik.enable</Name>
+      <Key>traefik.enable</key>
       <Value>true</Value>
     </Label>
   </Environment>
